@@ -1,0 +1,13 @@
+<head>
+<style>
+body { font-family: 'Helvetica', 'Arial', sans-serif; }
+</style>
+</head>
+
+<h1>Strains</h1>
+{% for flowers in flowers %}
+  <li><a href="http://www.leafly.com/{{ flowers.type }}/{{ flowers.name }}">Name: {{ flowers.name }}, THC-content: {{ flowers.thc_content }}</a></li>
+  <br>
+{% else %}
+  <li>No strains found.</li>
+{% endfor %}
