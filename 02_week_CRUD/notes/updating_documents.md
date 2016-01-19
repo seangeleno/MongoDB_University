@@ -8,7 +8,7 @@
 
 #Field Update Operators
 
-![Update Operators]("http://imgur.com/H2GeylT")
+![Update Operators](http://i.imgur.com/H2GeylT.png)
 
 
 updateOne updates the first document matching the selector
@@ -48,7 +48,7 @@ So, it adds it for you! no arithmetic required, how cool is that?
 
 #Array Update Operators
 
-![arrayUpdate]('http://imgur.com/Hh4yvhX')
+![arrayUpdate](http://i.imgur.com/Hh4yvhX.png)
 
 This says:
 If the field doesn't exist, create it, in this case an array field for reviews and we push the first element of the array
