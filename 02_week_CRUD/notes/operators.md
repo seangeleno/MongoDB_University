@@ -65,5 +65,68 @@ db.movieDetails.find({ $and : [ { "metacritic": { $ne: 100 } },
 ```
 
 ##Regex Operators
+###Regex stands for Regular Expressions!
+Allows us to use regular expressions to match fields with strings values
+Drills into awards.text and checks to see if
+/ delimits the operation
+^ means start at the beginning of w/e value we're matching against
+Match exactly a capital W, lower case o, lower case n
+. is wild card character
+* makes it match any character any number of times
+So, to summarize, it says:
+Give me back all documents where the awards.text field begins with the word Won
+
+```javascript
+
+db.movieDetails.find({ "awards.text": { $regex: /^Won.*/ } }).pretty()
+```
+By adding \s it makes it match exactly Won with a space after to further constrain the data and make it more precise to the current needs - ie: ignore fields that start with Wonder
+```javascript
+
+db.movieDetails.find({ "awards.text": { $regex: /^Won\s.*/ } }).pretty()
+```
+Using projection you can only show the title and awards fields
+```javascript
+db.movieDetails.find({ "awards.text": { $regex: /^Won.*/ } },
+                     { title: 1, "awards": 1, _id: 0}).pretty()
+```
 
 ##Array Operators
+
+Official Definition: $all matches an array that matches all values specified in the query
+
+Give me back ONLY documents where the under genres listed you find, Comedy && Crime && Drama
+Must have all three
+```javascript
+db.movieDetails.find({ genres: { $all: ["Comedy", "Crime", "Drama"] } }).pretty()
+db.movieDetails.find({ genres: { $all: ["Comedy", "Crime"] }}, {_id:0, name: 1, genres:1} ).pretty()
+```
+
+$size queries based on the length of an array
+
+This query asks for movies that were filmed in only 1 country
+```javascript
+db.movieDetails.find({ countries: { $size: 1 } }).pretty()
+
+
+```
+
+Oficial Definition: Selects documents if element in the array matches all the specific $elemMatch conditions
+
+
+```javascript
+
+db.movieDetails.find({ boxOffice: {$elemMatch: { country: "UK", revenue: { $gt: 15 } } } })
+```
+
+```javascript
+db.movieDetails.find({ $elemMatch { country: "USA", revenue: {$lt: 10}}})
+
+boxOffice: [ { "country": "USA", "revenue": 41.3 },
+             { "country": "Australia", "revenue": 2.9 },
+             { "country": "UK", "revenue": 10.1 },
+             { "country": "Germany", "revenue": 4.3 },
+             { "country": "France", "revenue": 3.5 } ]
+
+db.movieDetails.find({ boxOffice: { country: "UK", revenue: { $gt: 15 } } })
+```
