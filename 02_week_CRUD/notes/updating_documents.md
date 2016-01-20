@@ -98,8 +98,9 @@ db.movieDetails.updateOne({title: "The Martian"},
 ####$slice modifier for $push has to used with $each
 just want to keep 5 reviews in our document details and delete the rest
 
-Go ahead and push on everything that is listed in $each but keep just 5 in the array
-depending if it is a + or - it will pull the last or first, in this case first because it is positive
+The following command says: "Go ahead and push on everything that is listed in $each but keep just 5 in the array
+depending if it is a + or - it will pull the last or first, in this case first because it is positive."
+
 
 ####$position modifier
 ```javascript
@@ -116,9 +117,9 @@ db.movieDetails.updateOne({ title: "The Martian" },
 ```
 
 
-###updateMany() modifies all documents in the collection matching query
+#####updateMany() modifies all documents in the collection matching query
 
-####Data Cleaning Example
+#####Data Cleaning Example
 
 In the following example we search for all documents rated null
 
